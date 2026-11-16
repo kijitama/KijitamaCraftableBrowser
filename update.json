@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "product": "KijitamaCraftableBrowser",
-  "latestVersion": "1.0.0",
+  "latestVersion": "1.0.1",
   "affectedFrom": "0.0.0",
-  "affectedBefore": "1.0.0",
+  "affectedBefore": "1.0.1",
   "severity": "normal",
-  "message": "KijitamaCraftableBrowserの公開版です。",
+  "message": "ダウンロード時に表示失敗と出る問題と、EXEのビルド処理を修正しました。",
   "downloadUrl": "https://github.com/kijitama/KijitamaCraftableBrowser/releases",
-  "zipUrl": "https://github.com/kijitama/KijitamaCraftableBrowser/releases/download/v1.0.0/KijitamaCraftableBrowser-1.0.0.zip"
+  "zipUrl": "https://github.com/kijitama/KijitamaCraftableBrowser/releases/download/v1.0.1/KijitamaCraftableBrowser-1.0.1.zip"
 }
