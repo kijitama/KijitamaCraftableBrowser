@@ -1,0 +1,2 @@
+# KijitamaCraftableBrowser
+KijitamaCraftableBrowserの配布・更新情報
