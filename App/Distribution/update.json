@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "product": "KijitamaCraftableBrowser",
+  "latestVersion": "1.0.0",
+  "affectedFrom": "0.0.0",
+  "affectedBefore": "1.0.0",
+  "severity": "normal",
+  "message": "KijitamaCraftableBrowserの公開版です。",
+  "downloadUrl": "https://github.com/kijitama/KijitamaCraftableBrowser/releases",
+  "zipUrl": ""
+}

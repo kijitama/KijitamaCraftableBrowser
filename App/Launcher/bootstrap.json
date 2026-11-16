@@ -1,0 +1,15 @@
+{
+  "metadataTimeoutSeconds": 30,
+  "searchDirectories": [
+    "%ProgramW6432%/PowerShell/7",
+    "%ProgramFiles%/PowerShell/7",
+    "%LOCALAPPDATA%/Microsoft/PowerShell/7"
+  ],
+  "releaseApi": "https://api.github.com/repos/PowerShell/PowerShell/releases?per_page=50",
+  "helpUrl": "https://learn.microsoft.com/powershell/scripting/install/install-powershell-on-windows",
+  "downloadTimeoutSeconds": 600,
+  "releaseLine": "7.6",
+  "probeTimeoutMilliseconds": 10000,
+  "downloadPollMilliseconds": 100,
+  "installerPollMilliseconds": 200
+}

@@ -1,0 +1,7 @@
+/App/Data/
+/App/Lib/
+/App/Logs/
+/data/
+*.tmp
+*.bak
+*.log

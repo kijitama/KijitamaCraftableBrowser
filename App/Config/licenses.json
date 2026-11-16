@@ -1,0 +1,63 @@
+{
+  "publisher": "Kijitama",
+  "website": "https://note.com/kijitama",
+  "publisherPage": "https://note.com/kijitama",
+  "github": "https://github.com/kijitama",
+  "documents": [
+    {
+      "title": "KijitamaCraftableBrowser",
+      "file": "Licenses/KijitamaCraftableBrowser-LICENSE.txt",
+      "source": "https://note.com/kijitama",
+      "description": "アプリ本体の自作コード：MIT License。第三者の部品にはそれぞれのライセンスが適用されます。"
+    },
+    {
+      "title": "Lucide / Feather",
+      "file": "Licenses/Lucide-LICENSE.txt",
+      "source": "https://github.com/lucide-icons/lucide/blob/main/LICENSE",
+      "description": "同梱アイコン：ISC License。一部のFeather由来アイコンはMIT License。両方の原文を掲載します。"
+    },
+    {
+      "title": "Microsoft WebView2 SDK",
+      "file": "Licenses/WebView2-LICENSE.txt",
+      "source": "https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.3650.58",
+      "description": "初回取得するSDK部品：使用中のパッケージに含まれるライセンス原文です。"
+    },
+    {
+      "title": "Microsoft WebView2 SDK 第三者通知",
+      "file": "Licenses/WebView2-NOTICE.txt",
+      "source": "https://www.nuget.org/packages/Microsoft.Web.WebView2/1.0.3650.58",
+      "description": "使用中のパッケージに含まれるNOTICE原文です。"
+    },
+    {
+      "title": "PowerShell 7",
+      "file": "Licenses/PowerShell-LICENSE.txt",
+      "source": "https://github.com/PowerShell/PowerShell/blob/master/LICENSE.txt",
+      "description": "別途導入する実行環境：MIT License。配布するアプリにはPowerShell本体を同梱しません。"
+    },
+    {
+      "title": ".NET",
+      "file": "Licenses/DotNet-LICENSE.txt",
+      "source": "https://github.com/dotnet/runtime/blob/main/LICENSE.TXT",
+      "description": "実行環境：MIT License。依存部品の個別条件は導入済み環境に付属する通知もご確認ください。"
+    },
+    {
+      "title": "WPF / XAML",
+      "file": "Licenses/WPF-LICENSE.txt",
+      "source": "https://github.com/dotnet/wpf/blob/main/LICENSE.TXT",
+      "description": "画面表示技術：MIT License。XAMLは画面定義の形式であり、別の同梱ライブラリではありません。"
+    },
+    {
+      "title": "OpenAI Codex CLI",
+      "file": "Licenses/CodexCLI-LICENSE.txt",
+      "source": "https://github.com/openai/codex/blob/main/LICENSE",
+      "description": "任意で連携する外部CLI：Apache License 2.0。CLI本体は同梱しません。AIサービスの利用条件はこのコードライセンスとは別です。"
+    },
+    {
+      "title": "OpenAI Codex CLI NOTICE",
+      "file": "Licenses/CodexCLI-NOTICE.txt",
+      "source": "https://github.com/openai/codex/blob/main/NOTICE",
+      "description": "公式リポジトリのNOTICE。実際に導入したCLIのバージョンに付属する文書もご確認ください。"
+    }
+  ],
+  "notes": "Windows・Microsoft Edge WebView2 Runtimeは別途導入される製品で、各製品の使用許諾条件が適用されます。WebView2 SDKのライセンスとRuntimeの条件は別です。https://developer.microsoft.com/microsoft-edge/webview2/ に掲載の案内と、導入時の使用許諾条件をご確認ください。"
+}
