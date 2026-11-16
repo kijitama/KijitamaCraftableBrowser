@@ -19,7 +19,7 @@
     }
   },
   "ui": {
-    "title": "KijitamaCraftableBrowser 1.0.0",
+    "title": "KijitamaCraftableBrowser 1.0.1",
     "width": 1320,
     "height": 900,
     "historyWidth": 250,
@@ -147,7 +147,7 @@
   },
   "updates": {
     "enabled": true,
-    "currentVersion": "1.0.0",
+    "currentVersion": "1.0.1",
     "feedUrl": "https://raw.githubusercontent.com/kijitama/KijitamaCraftableBrowser/main/update.json",
     "timeoutSeconds": 5,
     "maxResponseBytes": 65536,

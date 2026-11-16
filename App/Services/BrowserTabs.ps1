@@ -1,3 +1,25 @@
+function Register-TabNavigation($Tab,$EventArgs) {
+    if (!$Tab.Navigation -or $Tab.Navigation.Id -ne $EventArgs.NavigationId) {
+        $Tab.Navigation=[pscustomobject]@{Id=$EventArgs.NavigationId;Urls=[Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal);Download=$false;Error=''}
+    }
+    [void]$Tab.Navigation.Urls.Add([string]$EventArgs.Uri)
+}
+function Register-TabDownload($Tab,[string]$Url) {
+    if (!$Tab -or !$Tab.Navigation -or !$Tab.Navigation.Urls.Contains($Url)) { return }
+    $Tab.Navigation.Download=$true
+    if ($Tab.Navigation.Error -eq 'ConnectionAborted' -and $Tab.Status -eq '表示失敗: ConnectionAborted') {
+        $Tab.Status=''
+        if ($Tab -eq $script:activeBrowserTab) { Update-ActiveTabUi }
+    }
+}
+function Set-TabNavigationResult($Tab,$EventArgs) {
+    $errorName=[string]$EventArgs.WebErrorStatus
+    $matching=$Tab.Navigation -and $Tab.Navigation.Id -eq $EventArgs.NavigationId
+    if ($matching) { $Tab.Navigation.Error=$errorName }
+    if ($EventArgs.IsSuccess -or ($matching -and $Tab.Navigation.Download -and $errorName -eq 'ConnectionAborted')) { $Tab.Status='' }
+    elseif ($errorName -ne 'OperationCanceled') { $Tab.Status='表示失敗: '+$errorName }
+}
+
 function Initialize-TabStrip {
     foreach ($name in @('TabsScroll','TabsScrollLeft','TabsScrollRight')) { $ui[$name]=$window.FindName($name) }
     $ui.TabsScroll.add_ScrollChanged({
@@ -169,7 +191,7 @@ function New-BrowserTab([string]$Url) {
     # Tab headers use their own content; Tag holds the tab identity, not an icon.
     $select.ContentTemplate=$null; $close.ContentTemplate=$null
     [void]$row.Children.Add($select);[void]$row.Children.Add($close)
-    $tab=[pscustomobject]@{ProfileId=[string]$profiles.activeId;View=$view;Core=$null;Header=$header;Select=$select;Title=$title;Url=$Url;Status='ページを読み込んでいます…';InitTask=$null;Started=[DateTime]::UtcNow;Closed=$false}
+    $tab=[pscustomobject]@{ProfileId=[string]$profiles.activeId;View=$view;Core=$null;Header=$header;Select=$select;Title=$title;Url=$Url;Status='ページを読み込んでいます…';InitTask=$null;Started=[DateTime]::UtcNow;Closed=$false;Navigation=$null}
     $select.Tag=$tab;$close.Tag=$tab;$view.Tag=$tab
     $select.add_Click({param($s,$e) Invoke-UiAction { Select-BrowserTab $s.Tag }})
     $close.add_Click({param($s,$e) Invoke-UiAction { Close-BrowserTab $s.Tag }})
@@ -185,6 +207,7 @@ function New-BrowserTab([string]$Url) {
         $core.Settings.AreDevToolsEnabled=$false
         $core.Settings.AreDefaultContextMenusEnabled=$true
         $core.add_NavigationStarting({param($s,$e)
+            $t=Get-BrowserTabForCore $s; if($t){Register-TabNavigation $t $e}
             if (!(Test-AllowedUrl $e.Uri)) { $e.Cancel=$true; $t=Get-BrowserTabForCore $s; if($t){$t.Status=Get-NavigationDeniedMessage $e.Uri;if($t -eq $script:activeBrowserTab){Update-ActiveTabUi}} }
         })
         $core.add_FrameNavigationStarting({param($s,$e)
@@ -210,8 +233,9 @@ function New-BrowserTab([string]$Url) {
         $core.add_HistoryChanged({param($s,$e) $t=Get-BrowserTabForCore $s;if($t -and $t -eq $script:activeBrowserTab){Update-ActiveTabUi}})
         $core.add_NavigationCompleted({param($s,$e)
             $t=Get-BrowserTabForCore $s;if(!$t){return}
-            if($e.IsSuccess){$t.Status='';Invoke-UiAction {Record-TabHistory $t}}
-            elseif($e.WebErrorStatus.ToString() -ne 'OperationCanceled'){$t.Status='表示失敗: '+$e.WebErrorStatus}
+            Set-TabNavigationResult $t $e
+            if($e.IsSuccess){Invoke-UiAction {Record-TabHistory $t}}
+
             if($t -eq $script:activeBrowserTab){Update-ActiveTabUi}
         })
         $core.add_ProcessFailed({param($s,$e) $t=Get-BrowserTabForCore $s;if($t){$t.Status='ブラウザー処理が停止しました。タブを開き直してください。';if($t -eq $script:activeBrowserTab){Update-ActiveTabUi}}})

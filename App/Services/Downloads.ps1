@@ -37,6 +37,7 @@ function Set-WebDownloadStatus([string]$Message) {
  Show-ActionToast $text
 }
 function Start-WebDownload($Core,$EventArgs) {
+ Register-TabDownload (Get-BrowserTabForCore $Core) ([string]$EventArgs.DownloadOperation.Uri)
  $deferral=$EventArgs.GetDeferral()
  $preserveSelectedPath=$false
  if($script:downloadIntent -and [object]::ReferenceEquals($script:downloadIntent.Core,$Core) -and [DateTime]::UtcNow -lt $script:downloadIntent.Expires -and $script:downloadIntent.Url -eq $EventArgs.DownloadOperation.Uri){
